@@ -1,2 +1,13 @@
 # Farmlang
 Farmlang is an animal themed esolang (esoteric language), made to de a comic, chaotic programming language. Detailed information (syntax, rules, etc) is on README.
+
+## Usage
+Farmlang code can be written at .farm files using text editors, and interpreted using the farmlang.c file (which needs the farmlang.h header). Usage must be: "./farmlang file.farm" on an terminal, with farmlang being the compiled version of farmlang.c.
+
+### Functions
+barn {} - Main function, needed to everything else. Must be used in the beginnning of every farmlang code.
+pig - Declares a string variable - (pig var = string) or (pig var = "string"). Has a 5% chance of declaring "oink" instead of the original string.
+cat - Declares a int variable, but using cat onomatophoeias instead of actual numbers (meow = 1, purr = 5, hiss = 10). Onomatophoeias can be used together either with space inbetween them to sum their values ("cat var = meow purr" makes the variable 6) or to multiply their values, firstly adding the consecutive meows and them multiplying with the rest ("cat var = purrhiss"  makes var = 50 and "cat var = meowmeowmeowpurr" make var = 15).
+cow() - Prints a variable, either a number or a string.
+chicken - Declares a variable based on user input ("chicken var" makes var = whatever user types in)
+horse()

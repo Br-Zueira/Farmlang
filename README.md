@@ -11,4 +11,8 @@ cat - Declares a int variable, but using cat onomatophoeias instead of actual nu
 cow() - Prints a variable, either a number or a string.
 chicken - Declares a variable based on user input ("chicken var" makes var = whatever user types in)
 horse(var, num1, num2, operator) - Does a math operation specified by the operator (either "+" for sum, "-" for subtraction, "*" for multiplication and "/" for division") between num1 and num2, and puts the result inside the var variable.
-owl(){} - Used as a if operator. 
+owl(){} - Used as a if operator. If condition inside parenthesis () is true, executes the code inside {}
+
+#### Rules
+As Farmlang is a limited language, it does not correctly recognize spaces and break lines at some situations (for example, spaces between functions and their parenthesis, like "cow ()" instead of correct "cow()" and brackets in different line of their function, like "barn\n{" instead of "barn{")
+When executed,

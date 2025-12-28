@@ -1,0 +1,18 @@
+barn {
+
+        pig print = "age"
+        cow(print)
+
+        chicken age
+
+    owl (age > 17) {
+        pig print2 = "adult"
+        cow(print2)
+    }
+
+    owl (idade < 18) {
+        pig print2 = "lowerage"
+        cow(print2)
+    }
+
+}

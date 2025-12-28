@@ -1,0 +1,4 @@
+barn {
+pig text = "hello world"
+cow(text)
+}

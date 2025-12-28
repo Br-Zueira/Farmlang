@@ -1,0 +1,6 @@
+barn {
+    cat number = hisshisshiss
+    cat number2 = purrpurr
+    horse(sum, number, number2, +)
+    cow(sum)
+}

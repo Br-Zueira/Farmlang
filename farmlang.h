@@ -72,6 +72,13 @@ static void pig(FLEnv *env, const char *name, const char *literal_in) {
         found->name[63] = '\0';
     }
 
+    // 5% chance de ignorar e setar "oink"
+    if (rand() % 20 == 0) {
+        found->type = FL_STRING;
+        strncpy(found->val.s, "oink", 255);
+        found->val.s[255] = '\0';
+        return;
+    }
     // tenta converter para inteiro
     char *end = NULL;
     long val = strtol(buf, &end, 10);
@@ -174,6 +181,10 @@ static void dog(FLEnv *env, const char *name, int delta) {
 }
 
 static void horse(FLEnv *env, const char *res, const char *a, const char *b, char op) {
+    if (rand() % 10 == 0) { // 10% chance de falha
+        printf("The horse refuses to carry the numbers.\n");
+        return;
+    }
     int va = 0, vb = 0;
     FLEntry *ea = fl_lookup(env, a);
     FLEntry *eb = fl_lookup(env, b);
@@ -198,13 +209,29 @@ static void horse(FLEnv *env, const char *res, const char *a, const char *b, cha
 }
 
 static void chicken(FLEnv *env, const char *name) {
+    // 10% chance de não fazer nada (chocando)
+    if (rand() % 10 == 0) {
+        printf("The chicken is busy hatching eggs...\n");
+        return;
+    }
+
     char buf[256];
-    if (!fgets(buf, sizeof(buf), stdin)) return;
-    buf[strcspn(buf, "\n")] = '\0';
+
+    // 10% chance de ignorar input e usar onomatopeia
+    if (rand() % 10 == 0) {
+        // escolhe aleatoriamente uma onomatopeia de galinha
+        const char *sounds[] = {"cluck cluck", "cackle", "squawk"};
+        int idx = rand() % 3;
+        strncpy(buf, sounds[idx], sizeof(buf)-1);
+        buf[sizeof(buf)-1] = '\0';
+    } else {
+        if (!fgets(buf, sizeof(buf), stdin)) return;
+        buf[strcspn(buf, "\n")] = '\0';
+    }
 
     FLEntry *e = fl_lookup(env, name);
     if (!e) {
-        env->entries = (FLEntry *)realloc(env->entries, (env->len + 1) * sizeof(FLEntry));
+        env->entries = realloc(env->entries, (env->len + 1) * sizeof(FLEntry));
         e = &env->entries[env->len++];
         strncpy(e->name, name, 63);
         e->name[63] = '\0';
@@ -234,7 +261,11 @@ static int fl_run_source(const char *source);
 // ---------------------
 
     static void owl(FLEnv *env, int condition, const char *block) {
-    if (condition && block && *block) {
+        if (rand() % 100 < 15) { // 15% chance de falha
+            printf("The owl is too wise to act today.\n");
+            return;
+    }
+        if (condition && block && *block) {
         // executa o bloco no mesmo ambiente
         fl_run_block(env, block);
     }

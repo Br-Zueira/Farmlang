@@ -275,19 +275,41 @@ static int fl_run_source(const char *source);
 // Interpretador top-level
 // ---------------------
 
-    static int fl_run_source(const char *source) {
-    if (rand() % 4 == 0) { // 25% chance de falha global
+static int fl_run_source(const char *source) {
+    // 1. Verifica se começa com "barn {"
+    const char *barn_kw = "barn {";
+    if (strncmp(source, barn_kw, strlen(barn_kw)) != 0) {
+        printf("Animals outside a barn won't do the work.\n");
+        return 1;
+    }
+
+    // 2. Verifica se tem fechamento de chave
+    const char *block_start = strchr(source, '{');
+    const char *block_end   = strrchr(source, '}');
+    if (!block_start || !block_end || block_end <= block_start) {
+        printf("The barn had a breach in its fences, so the animals escaped.\n");
+        return 1;
+    }
+
+    // 3. Chance de falha global (25%)
+    if (rand() % 4 == 0) {
         printf("The animals are sleeping...\n");
         return 1;
     }
 
+    // Extrai conteúdo dentro de barn { ... }
+    size_t len = block_end - block_start - 1;
+    char *block = malloc(len + 1);
+    strncpy(block, block_start + 1, len);
+    block[len] = '\0';
+
     FLEnv env;
     fl_env_init(&env);
 
-    // executa o programa no ambiente novo
-    int rc = fl_run_block(&env, source);
+    int rc = fl_run_block(&env, block);
 
     fl_env_free(&env);
+    free(block);
     return rc;
 }
 

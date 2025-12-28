@@ -12,6 +12,7 @@ cow() - Prints a variable, either a number or a string.
 chicken - Declares a variable based on user input ("chicken var" makes var = whatever user types in)
 horse(var, num1, num2, operator) - Does a math operation specified by the operator (either "+" for sum, "-" for subtraction, "*" for multiplication and "/" for division") between num1 and num2, and puts the result inside the var variable.
 owl(){} - Used as a if operator. If condition inside parenthesis () is true, executes the code inside {}
+dog(var, "operator"number) - operator = "+" or "-" sum or subtract the var by the number and stores the result back at the var
 
 #### Rules
 As Farmlang is a limited language, it does not correctly recognize spaces and break lines at some situations (for example, spaces between functions and their parenthesis, like "cow ()" instead of correct "cow()" and brackets in different line of their function, like "barn\n{" instead of "barn{")
@@ -22,3 +23,4 @@ cow() - has a 20% chance of refusing to "moo" (print) whatever it was intended t
 chicken - has a 10% chance of not get input from user because it is putting eggs + 10% chance of getting the input, but change it to chicken sounds (cluck cluck, cackle, squawk)
 horse - has a 10% chance of refusing to "carry the numbers" (do the math)
 owl - has a 15% chance of being too wise to act today (not executing the functions inside it even if the condition is true)
+dog - as the best friend of man, never disappoints you and always correctly do what you ask.
